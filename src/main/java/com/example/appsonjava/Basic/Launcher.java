@@ -1,4 +1,4 @@
-package com.example.appsonjava;
+package com.example.appsonjava.Basic;
 
 import javafx.application.Application;
 

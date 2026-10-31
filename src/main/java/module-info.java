@@ -4,4 +4,5 @@ open module com.example.appsonjava {
 
 
     exports com.example.appsonjava;
+    exports com.example.appsonjava.Basic;
 }
