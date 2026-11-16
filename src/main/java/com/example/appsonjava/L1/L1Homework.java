@@ -20,7 +20,7 @@ public class L1Homework extends Application {
     private static void logInfo(String prefix) {
         String nameOfCurrentThread = Thread.currentThread().getName();
         boolean isFxApplicationThread = Platform.isFxApplicationThread();
-        System.out.println("[" + prefix + "] " + nameOfCurrentThread);
+        System.out.println("[" + prefix + "] " + nameOfCurrentThread + "Is FxApplicationThread" + isFxApplicationThread);
     }
 
     @Override
@@ -29,7 +29,7 @@ public class L1Homework extends Application {
         logInfo("START");
         Label title = new Label("L1. EnvironmentAuditorApp");       //leaf
         StackPane root = new StackPane(title);                          //branch
-        Scene scene = new Scene(root, 1000, 1000);          //scene
+        Scene scene = new Scene(root, 520, 340);          //scene
 
         primareStage.setTitle("L1. Check window creation");
         primareStage.setScene(scene);
@@ -39,12 +39,16 @@ public class L1Homework extends Application {
     @Override
     public void init() throws Exception {
         logInfo("INIT");
-        // String version = System.getProperty();
-        // String vendor = System.getProperty();
-        // String name = System.getProperty();
-        // String arch = System.getProperty();
-        // String javaFXVersion = System.getProperty();
-        // String javaFXRuntimeVersion = System.getProperty();
+        String version = System.getProperty("java.version");
+        System.out.println("Java Version " + version);
+        String vendor = System.getProperty("java.vendor");
+        System.out.println("Java Vendor " + vendor);
+        String name = System.getProperty("os.name");
+        System.out.println("Os name " +name);
+        String arch = System.getProperty("os.arch");
+        System.out.println("Java Arch " + arch);
+        String javaFXVersion = System.getProperty("javafx.version");
+        System.out.println("JavaFX Version " + javaFXVersion);
     }
 
     @Override
