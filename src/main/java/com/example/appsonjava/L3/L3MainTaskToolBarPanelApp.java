@@ -16,8 +16,9 @@ public class L3MainTaskToolBarPanelApp extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         VBox sideBar = new VBox();
-        sideBar.setAlignment(Pos.BASELINE_LEFT);
+        sideBar.setAlignment(Pos.TOP_LEFT);
         sideBar.setPrefWidth(180);
+        sideBar.setMinHeight(75);
         sideBar.setStyle("-fx-border-color: #ff0000;");
         Label appName = new Label("L3MainTaskToolBarPanelApp");
         appName.setStyle("-fx-font-weight: 100;");
@@ -40,12 +41,18 @@ public class L3MainTaskToolBarPanelApp extends Application {
 
         searchField.getChildren().addAll(gridPane);
         searchField.setStyle("-fx-border-color: #a6a6a6");
+
         HBox.setHgrow(searchField, Priority.ALWAYS);
-        searchField.setAlignment(Pos.CENTER);
+        searchField.setAlignment(Pos.TOP_CENTER);
+
         Region spacer = new Region();
         spacer.setMinSize(200, 200);
+
+        VBox searchFieldWithSpacer = new VBox(searchField, sideBar);
+        VBox.setVgrow(searchFieldWithSpacer, Priority.ALWAYS);
         HBox.setHgrow(spacer, Priority.ALWAYS);
-        StackPane container = new StackPane(sideBar, spacer, searchField);
+
+        HBox container = new HBox(sideBar, searchFieldWithSpacer);
 
         //Rights
         VBox admin = new VBox();
@@ -56,9 +63,10 @@ public class L3MainTaskToolBarPanelApp extends Application {
 
         admin.setAlignment(Pos.TOP_RIGHT);
         admin.setPrefSize(500, 100);
-        admin.setMaxWidth(1000);
+        admin.setMinWidth(100);
+        admin.setMaxWidth(250);
 
-        StackPane allParts = new StackPane(container, admin);
+        HBox allParts = new HBox(container, admin);
 
         Scene scene = new Scene(allParts, 720, 340);
         primaryStage.setTitle("ToolBarPanelApp");
