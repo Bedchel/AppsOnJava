@@ -1,7 +1,7 @@
+
 package com.example.appsonjava.L3;
 
 import javafx.application.Application;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -15,11 +15,15 @@ public class L3MainTaskToolBarPanelApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+        // SideBar
         VBox sideBar = new VBox();
         sideBar.setAlignment(Pos.TOP_LEFT);
         sideBar.setPrefWidth(180);
+        sideBar.setMinWidth(180);
         sideBar.setMinHeight(75);
-        sideBar.setStyle("-fx-border-color: #ff0000;");
+        sideBar.setStyle("-fx-background-color: #ff0000; -fx-border-color: #000000;");
+
         Label appName = new Label("L3MainTaskToolBarPanelApp");
         appName.setStyle("-fx-font-weight: 100;");
 
@@ -28,47 +32,68 @@ public class L3MainTaskToolBarPanelApp extends Application {
 
         sideBar.getChildren().addAll(appName, createButton, openButton);
 
-        //Search field
+        // Search field
         StackPane searchField = new StackPane();
-        ColumnConstraints column1 = new ColumnConstraints(100, 100, 168);
-        column1.setHalignment(HPos.CENTER);
+        searchField.setPrefHeight(80);
+        searchField.setMinHeight(80);
+        searchField.setMaxHeight(80);
+        searchField.setMaxWidth(Double.MAX_VALUE);
+        searchField.setStyle("-fx-background-color: #d2d2d2; -fx-border-color: #000000;");
+
         TextField searchFieldTF = new TextField();
         searchFieldTF.setPromptText("Search field");
+        searchFieldTF.setMaxWidth(Double.MAX_VALUE);
 
         GridPane gridPane = new GridPane();
         gridPane.setPadding(new Insets(24));
+
+        ColumnConstraints column1 = new ColumnConstraints();
+        column1.setHgrow(Priority.ALWAYS);
+        column1.setFillWidth(true);
+        gridPane.getColumnConstraints().add(column1);
+
         gridPane.add(searchFieldTF, 0, 0);
+        GridPane.setHgrow(searchFieldTF, Priority.ALWAYS);
 
-        searchField.getChildren().addAll(gridPane);
-        searchField.setStyle("-fx-border-color: #a6a6a6");
+        searchField.getChildren().add(gridPane);
 
-        HBox.setHgrow(searchField, Priority.ALWAYS);
-        searchField.setAlignment(Pos.TOP_CENTER);
-
+        // Spacer
         Region spacer = new Region();
         spacer.setMinSize(200, 200);
+        spacer.setStyle("-fx-background-color: #ffffff; -fx-border-color: #000000;");
 
-        VBox searchFieldWithSpacer = new VBox(searchField, sideBar);
-        VBox.setVgrow(searchFieldWithSpacer, Priority.ALWAYS);
-        HBox.setHgrow(spacer, Priority.ALWAYS);
+        VBox.setVgrow(spacer, Priority.ALWAYS);
 
+        // Search field + Spacer
+        VBox searchFieldWithSpacer = new VBox(searchField, spacer);
+        searchFieldWithSpacer.setFillWidth(true);
+
+        HBox.setHgrow(searchFieldWithSpacer, Priority.ALWAYS);
+
+        // Container
         HBox container = new HBox(sideBar, searchFieldWithSpacer);
+        HBox.setHgrow(container, Priority.ALWAYS);
 
-        //Rights
+        // Admin
         VBox admin = new VBox();
+
         Label right = new Label("Користувач: Admin");
         Button exit = new Button("Exit");
+
         admin.getChildren().addAll(exit, right);
-        admin.setStyle("-fx-border-color: #ffa600");
+        admin.setStyle("-fx-background-color: #998e8e; -fx-border-color: #000000;");
 
         admin.setAlignment(Pos.TOP_RIGHT);
         admin.setPrefSize(500, 100);
-        admin.setMinWidth(100);
+        admin.setMinWidth(50);
         admin.setMaxWidth(250);
 
+        // All parts
         HBox allParts = new HBox(container, admin);
+        HBox.setHgrow(container, Priority.ALWAYS);
 
         Scene scene = new Scene(allParts, 720, 340);
+
         primaryStage.setTitle("ToolBarPanelApp");
         primaryStage.setScene(scene);
         primaryStage.show();
